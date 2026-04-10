@@ -1,8 +1,15 @@
 import { Routes, Route, Navigate, NavLink, Outlet } from 'react-router-dom'
 import CoinTransactionsPage from './pages/CoinTransactionsPage'
+import CoinGrantsPage from './pages/CoinGrantsPage'
+import BatchUploadsPage from './pages/BatchUploadsPage'
+import GrantReasonsPage from './pages/GrantReasonsPage'
+import GrantReasonDetailPage from './pages/GrantReasonDetailPage'
 
 const navItems = [
   { to: '/coins/transactions', label: 'Coin Management' },
+  { to: '/coins/grants', label: 'Coin Grants' },
+  { to: '/coins/batch-uploads', label: 'Batch Uploads' },
+  { to: '/coins/grant-reasons', label: 'Grant Reasons' },
 ]
 
 const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
@@ -50,6 +57,10 @@ function App() {
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Navigate to="/coins/transactions" replace />} />
         <Route path="coins/transactions" element={<CoinTransactionsPage />} />
+        <Route path="coins/grants" element={<CoinGrantsPage />} />
+        <Route path="coins/batch-uploads" element={<BatchUploadsPage />} />
+        <Route path="coins/grant-reasons" element={<GrantReasonsPage />} />
+        <Route path="coins/grant-reasons/:id" element={<GrantReasonDetailPage />} />
       </Route>
     </Routes>
   )

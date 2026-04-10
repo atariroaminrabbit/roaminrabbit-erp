@@ -1,0 +1,11 @@
+userId,amount,reason
+RRID-0001,5,marketing-activation
+RRID-0004,10,referral-reward
+RRID-0006,5,event-participation
+RRID-0009,8,goodwill
+RRID-0011,10,partnership-promo
+RRID-0012,5,marketing-activation
+RRID-0004,3,goodwill
+USR-INVALID,5,marketing-activation
+RRID-0001,-5,referral-reward
+RRID-0006,10,unknown-reason

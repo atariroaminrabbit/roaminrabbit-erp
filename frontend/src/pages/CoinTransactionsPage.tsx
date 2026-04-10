@@ -9,6 +9,7 @@ const { Column, HeaderCell, Cell } = Table
 const typeOptions = [
   { label: 'Earned', value: 'earned' },
   { label: 'Redeemed', value: 'redeemed' },
+  { label: 'Granted', value: 'granted' },
 ]
 
 const userIdOptions = Array.from(new Set(coinTransactions.map((t) => t.userId)))
@@ -154,14 +155,19 @@ export default function CoinTransactionsPage() {
         <Column flexGrow={1}>
           <HeaderCell>Type</HeaderCell>
           <Cell>
-            {(rowData: CoinTransaction) => (
-              <Tag
-                color={rowData.type === 'earned' ? 'green' : 'orange'}
-                style={{ fontSize: 12, opacity: 0.5 }}
-              >
-                {rowData.type === 'earned' ? 'Earned' : 'Redeemed'}
-              </Tag>
-            )}
+            {(rowData: CoinTransaction) => {
+              const typeConfig: Record<string, { label: string; color: 'green' | 'orange' | 'cyan' }> = {
+                earned: { label: 'Earned', color: 'green' },
+                redeemed: { label: 'Redeemed', color: 'orange' },
+                granted: { label: 'Granted', color: 'cyan' },
+              }
+              const config = typeConfig[rowData.type] ?? { label: rowData.type, color: 'cyan' }
+              return (
+                <Tag color={config.color} style={{ fontSize: 12, opacity: 0.5 }}>
+                  {config.label}
+                </Tag>
+              )
+            }}
           </Cell>
         </Column>
 
@@ -177,8 +183,19 @@ export default function CoinTransactionsPage() {
         </Column>
 
         <Column flexGrow={1}>
-          <HeaderCell>Order ID</HeaderCell>
-          <Cell dataKey="orderId" />
+          <HeaderCell>Reference Type</HeaderCell>
+          <Cell>
+            {(rowData: CoinTransaction) => (
+              <Tag style={{ fontSize: 12, opacity: 0.5 }}>
+                {rowData.referenceType === 'grant' ? 'Grant' : 'Order'}
+              </Tag>
+            )}
+          </Cell>
+        </Column>
+
+        <Column flexGrow={1}>
+          <HeaderCell>Reference ID</HeaderCell>
+          <Cell dataKey="referenceId" />
         </Column>
 
         <Column flexGrow={1}>
