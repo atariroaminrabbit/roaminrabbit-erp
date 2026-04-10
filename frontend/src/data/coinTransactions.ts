@@ -1,0 +1,246 @@
+import type { CoinTransaction } from '../types'
+
+// Rules applied:
+// - 1 RoaminCoin = $1 USD; earned = 5% of eSIM purchase price
+// - Earn and redeem are mutually exclusive per order
+// - Redeemed amount = full wallet balance at time of redemption, capped at order price
+// - expiryDate is reserved for future use and must NOT be rendered in the UI
+// - Order ID format: RR-YYYYMMDD-XXX (XXX = nth order placed that day)
+
+export const coinTransactions: CoinTransaction[] = [
+  // RRID-0001 (Sarah Tan) — 3 purchases, no redemption yet, balance accumulating
+  {
+    id: 'TXN-0001',
+    userId: 'RRID-0001',
+    type: 'earned',
+    amount: 1.25,
+    orderId: 'RR-20251105-001',
+    timestamp: '2025-11-05T10:14:00Z',
+    balanceAfter: 1.25,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0002',
+    userId: 'RRID-0001',
+    type: 'earned',
+    amount: 1.10,
+    orderId: 'RR-20251210-001',
+    timestamp: '2025-12-10T14:32:00Z',
+    balanceAfter: 2.35,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0003',
+    userId: 'RRID-0001',
+    type: 'earned',
+    amount: 1.20,
+    orderId: 'RR-20260115-001',
+    timestamp: '2026-01-15T09:05:00Z',
+    balanceAfter: 3.55,
+    expiryDate: null,
+  },
+
+  // RRID-0004 (Mei Chen) — 5 purchases, 1 full redemption cycle then re-accumulating
+  {
+    id: 'TXN-0004',
+    userId: 'RRID-0004',
+    type: 'earned',
+    amount: 1.00,
+    orderId: 'RR-20251120-001',
+    timestamp: '2025-11-20T11:45:00Z',
+    balanceAfter: 1.00,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0005',
+    userId: 'RRID-0004',
+    type: 'earned',
+    amount: 1.40,
+    orderId: 'RR-20251205-001',
+    timestamp: '2025-12-05T16:20:00Z',
+    balanceAfter: 2.40,
+    expiryDate: null,
+  },
+  {
+    // Redeemed full $2.40 balance — no earn on this order
+    id: 'TXN-0006',
+    userId: 'RRID-0004',
+    type: 'redeemed',
+    amount: 2.40,
+    orderId: 'RR-20260103-001',
+    timestamp: '2026-01-03T13:10:00Z',
+    balanceAfter: 0.00,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0007',
+    userId: 'RRID-0004',
+    type: 'earned',
+    amount: 1.30,
+    orderId: 'RR-20260120-001',
+    timestamp: '2026-01-20T10:50:00Z',
+    balanceAfter: 1.30,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0008',
+    userId: 'RRID-0004',
+    type: 'earned',
+    amount: 1.25,
+    orderId: 'RR-20260214-001',
+    timestamp: '2026-02-14T15:33:00Z',
+    balanceAfter: 2.55,
+    expiryDate: null,
+  },
+
+  // RRID-0006 (Daniel Wu) — 4 purchases, 1 full redemption cycle
+  {
+    id: 'TXN-0009',
+    userId: 'RRID-0006',
+    type: 'earned',
+    amount: 1.15,
+    orderId: 'RR-20260116-001',
+    timestamp: '2026-01-16T08:22:00Z',
+    balanceAfter: 1.15,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0010',
+    userId: 'RRID-0006',
+    type: 'earned',
+    amount: 1.00,
+    orderId: 'RR-20260128-001',
+    timestamp: '2026-01-28T17:45:00Z',
+    balanceAfter: 2.15,
+    expiryDate: null,
+  },
+  {
+    // Redeemed full $2.15 balance — no earn on this order
+    id: 'TXN-0011',
+    userId: 'RRID-0006',
+    type: 'redeemed',
+    amount: 2.15,
+    orderId: 'RR-20260210-001',
+    timestamp: '2026-02-10T12:00:00Z',
+    balanceAfter: 0.00,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0012',
+    userId: 'RRID-0006',
+    type: 'earned',
+    amount: 1.35,
+    orderId: 'RR-20260301-001',
+    timestamp: '2026-03-01T09:30:00Z',
+    balanceAfter: 1.35,
+    expiryDate: null,
+  },
+
+  // RRID-0009 (Tom Nakamura) — 6 purchases, 2 full redemption cycles (power user)
+  {
+    id: 'TXN-0013',
+    userId: 'RRID-0009',
+    type: 'earned',
+    amount: 1.00,
+    orderId: 'RR-20251108-001',
+    timestamp: '2025-11-08T10:00:00Z',
+    balanceAfter: 1.00,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0014',
+    userId: 'RRID-0009',
+    type: 'earned',
+    amount: 1.50,
+    orderId: 'RR-20251201-001',
+    timestamp: '2025-12-01T14:15:00Z',
+    balanceAfter: 2.50,
+    expiryDate: null,
+  },
+  {
+    // Redeemed full $2.50 balance — no earn on this order
+    id: 'TXN-0015',
+    userId: 'RRID-0009',
+    type: 'redeemed',
+    amount: 2.50,
+    orderId: 'RR-20251220-001',
+    timestamp: '2025-12-20T11:30:00Z',
+    balanceAfter: 0.00,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0016',
+    userId: 'RRID-0009',
+    type: 'earned',
+    amount: 1.20,
+    orderId: 'RR-20260110-001',
+    timestamp: '2026-01-10T09:45:00Z',
+    balanceAfter: 1.20,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0017',
+    userId: 'RRID-0009',
+    type: 'earned',
+    amount: 1.45,
+    orderId: 'RR-20260205-001',
+    timestamp: '2026-02-05T16:00:00Z',
+    balanceAfter: 2.65,
+    expiryDate: null,
+  },
+  {
+    // Redeemed full $2.65 balance — no earn on this order
+    id: 'TXN-0018',
+    userId: 'RRID-0009',
+    type: 'redeemed',
+    amount: 2.65,
+    orderId: 'RR-20260308-001',
+    timestamp: '2026-03-08T13:20:00Z',
+    balanceAfter: 0.00,
+    expiryDate: null,
+  },
+
+  // RRID-0011 (Marcus Okonkwo) — 3 purchases in March, balance accumulating
+  {
+    id: 'TXN-0019',
+    userId: 'RRID-0011',
+    type: 'earned',
+    amount: 1.10,
+    orderId: 'RR-20260307-001',
+    timestamp: '2026-03-07T10:10:00Z',
+    balanceAfter: 1.10,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0020',
+    userId: 'RRID-0011',
+    type: 'earned',
+    amount: 1.25,
+    orderId: 'RR-20260315-001',
+    timestamp: '2026-03-15T14:55:00Z',
+    balanceAfter: 2.35,
+    expiryDate: null,
+  },
+  {
+    id: 'TXN-0021',
+    userId: 'RRID-0011',
+    type: 'earned',
+    amount: 0.80,
+    orderId: 'RR-20260328-001',
+    timestamp: '2026-03-28T11:40:00Z',
+    balanceAfter: 3.15,
+    expiryDate: null,
+  },
+
+  // RRID-0012 (Lin Hui) — 1 purchase, just started earning
+  {
+    id: 'TXN-0022',
+    userId: 'RRID-0012',
+    type: 'earned',
+    amount: 0.60,
+    orderId: 'RR-20260322-001',
+    timestamp: '2026-03-22T09:00:00Z',
+    balanceAfter: 0.60,
+    expiryDate: null,
+  },
+]
