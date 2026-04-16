@@ -37,3 +37,61 @@ export interface CoinMonthlyReport {
   coinsRedeemed: number     // total redeemed that month in USD
   outstandingLiability: number // cumulative unspent coins at end of month in USD
 }
+
+// ── Partner Management ────────────────────────────────────────────────────────
+
+export interface Partner {
+  id: string
+  companyType: 'B2B' | 'B2C'
+  companyName: string
+  contactPersonName: string
+  email: string
+  phoneType: 'Mobile' | 'Office'
+  phoneCode: string        // e.g. '+65'
+  phoneNumber: string
+  country: string          // ISO code e.g. 'SG'
+  companyAddress?: string
+  createdAt: string
+}
+
+export interface MasterCatalogSku {
+  sku: string              // e.g. 'MP-AU1GBNONHKIP-07-01'
+  vendor: string           // e.g. 'ESIM Access'
+  esimLabel: string
+  country: string          // Country or region name
+  countryRegion?: string[] // Populated only for regional SKUs
+  packageSpec: string      // e.g. 'Australia 1GB 7Days (nonhkip)'
+  networkType?: string
+  specification?: string
+  bandwidth: string        // e.g. '1GB'
+  validity: string         // e.g. '7 Days'
+  settlementPrice: number  // IDR, no decimals
+}
+
+export interface PartnerPackageConfig {
+  id: string
+  partnerId: string
+  sku: string              // References MasterCatalogSku.sku
+  partnerPrice: number     // IDR, admin-set
+  // Denormalised from master catalog for display
+  vendor: string
+  esimLabel: string
+  country: string
+  countryRegion?: string[]
+  packageSpec: string
+  networkType?: string
+  specification?: string
+  bandwidth: string
+  validity: string
+  settlementPrice: number
+}
+
+export interface ScheduledUpload {
+  id: string
+  partnerId: string
+  fileName: string
+  uploadedAt: string                      // ISO timestamp
+  activationAt: string | 'immediate'      // ISO timestamp or 'immediate'
+  status: 'pending' | 'applied' | 'cancelled'
+  rows: Array<{ sku: string; partnerPrice: number }> // snapshot for re-download
+}

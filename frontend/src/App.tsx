@@ -4,12 +4,28 @@ import CoinGrantsPage from './pages/CoinGrantsPage'
 import BatchUploadsPage from './pages/BatchUploadsPage'
 import GrantReasonsPage from './pages/GrantReasonsPage'
 import GrantReasonDetailPage from './pages/GrantReasonDetailPage'
+import PartnersPage from './pages/PartnersPage'
+import PartnerFormPage from './pages/PartnerFormPage'
+import PartnerPackagesPage from './pages/PartnerPackagesPage'
 
-const navItems = [
-  { to: '/coins/transactions', label: 'Coin Management' },
-  { to: '/coins/grants', label: 'Coin Grants' },
-  { to: '/coins/batch-uploads', label: 'Batch Uploads' },
-  { to: '/coins/grant-reasons', label: 'Grant Reasons' },
+// ── Nav structure ─────────────────────────────────────────────────────────────
+
+const navSections = [
+  {
+    label: 'RoaminCoins',
+    items: [
+      { to: '/coins/transactions', label: 'Coin Management' },
+      { to: '/coins/grants', label: 'Coin Grants' },
+      { to: '/coins/batch-uploads', label: 'Batch Uploads' },
+      { to: '/coins/grant-reasons', label: 'Grant Reasons' },
+    ],
+  },
+  {
+    label: 'Partner Management',
+    items: [
+      { to: '/partners', label: 'Partners' },
+    ],
+  },
 ]
 
 const navLinkStyle = ({ isActive }: { isActive: boolean }) => ({
@@ -31,13 +47,17 @@ function AppLayout() {
           <span style={{ fontWeight: 600, color: '#fff' }}>RoaminRabbit <span style={{ color: '#0ecdc2' }}>ERP</span></span>
         </div>
         <nav style={{ flex: 1, padding: '12px 8px', overflowY: 'auto' }}>
-          <div style={{ padding: '12px 12px 4px', fontSize: 11, fontWeight: 600, color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            RoaminCoins
-          </div>
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} style={navLinkStyle}>
-              {item.label}
-            </NavLink>
+          {navSections.map((section) => (
+            <div key={section.label}>
+              <div style={{ padding: '12px 12px 4px', fontSize: 11, fontWeight: 600, color: '#555', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                {section.label}
+              </div>
+              {section.items.map((item) => (
+                <NavLink key={item.to} to={item.to} style={navLinkStyle}>
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
         <div style={{ padding: '12px 16px', borderTop: '1px solid #2e3138' }}>
@@ -56,11 +76,17 @@ function App() {
     <Routes>
       <Route path="/" element={<AppLayout />}>
         <Route index element={<Navigate to="/coins/transactions" replace />} />
+        {/* RoaminCoins */}
         <Route path="coins/transactions" element={<CoinTransactionsPage />} />
         <Route path="coins/grants" element={<CoinGrantsPage />} />
         <Route path="coins/batch-uploads" element={<BatchUploadsPage />} />
         <Route path="coins/grant-reasons" element={<GrantReasonsPage />} />
         <Route path="coins/grant-reasons/:id" element={<GrantReasonDetailPage />} />
+        {/* Partner Management */}
+        <Route path="partners" element={<PartnersPage />} />
+        <Route path="partners/add" element={<PartnerFormPage />} />
+        <Route path="partners/:id/edit" element={<PartnerFormPage />} />
+        <Route path="partners/:id/packages" element={<PartnerPackagesPage />} />
       </Route>
     </Routes>
   )

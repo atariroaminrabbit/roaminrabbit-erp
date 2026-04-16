@@ -1,3 +1,63 @@
 body {
   background-color: #1a1d24;
 }
+
+/* Override RSuite's default blue primary with the RoaminRabbit teal */
+.rs-theme-dark {
+  --rs-primary-50:  #e6faf9;
+  --rs-primary-100: #b3f0ed;
+  --rs-primary-200: #80e6e1;
+  --rs-primary-300: #4ddbd5;
+  --rs-primary-400: #2dd9d4;
+  --rs-primary-500: #0ecdc2;
+  --rs-primary-600: #0ab5ab;
+  --rs-primary-700: #089e94;
+  --rs-primary-800: #06877d;
+  --rs-primary-900: #047066;
+
+  /* Ghost buttons */
+  --rs-btn-ghost-border:        #0ecdc2;
+  --rs-btn-ghost-text:          #0ecdc2;
+  --rs-btn-ghost-hover-bg:      rgba(14, 205, 194, 0.1);
+  --rs-btn-ghost-hover-border:  #2dd9d4;
+  --rs-btn-ghost-hover-text:    #2dd9d4;
+  --rs-btn-ghost-active-border: #0ab5ab;
+  --rs-btn-ghost-active-text:   #0ab5ab;
+
+  /* Input focus */
+  --rs-input-focus-border:      #0ecdc2;
+  --rs-color-focus-ring:        rgba(14, 205, 194, 0.25);
+
+  /* Picker / dropdown selection */
+  --rs-picker-value:                    #0ecdc2;
+  --rs-listbox-option-hover-bg:         rgba(14, 205, 194, 0.1);
+  --rs-listbox-option-selected-text:    #0ecdc2;
+  --rs-listbox-option-selected-bg:      rgba(14, 205, 194, 0.15);
+}
+
+/* Clean up RSuite fixed-right column shadow in dark theme */
+.rs-table-cell-group-fixed-right {
+  box-shadow: -1px 0 0 #3c3f48 !important;
+}
+
+/* Responsive page header — stack title + action button vertically on small screens */
+@media (max-width: 600px) {
+  .page-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+}
+
+/* Responsive form rows — stack to full-width on small screens */
+@media (max-width: 768px) {
+  .form-row .rs-flex-box-grid-item {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 16px;
+  }
+  .form-row .rs-flex-box-grid-item:last-child {
+    margin-bottom: 0;
+  }
+}
