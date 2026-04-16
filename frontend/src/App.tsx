@@ -1,9 +1,4 @@
 import { Routes, Route, Navigate, NavLink, Outlet } from 'react-router-dom'
-import CoinTransactionsPage from './pages/CoinTransactionsPage'
-import CoinGrantsPage from './pages/CoinGrantsPage'
-import BatchUploadsPage from './pages/BatchUploadsPage'
-import GrantReasonsPage from './pages/GrantReasonsPage'
-import GrantReasonDetailPage from './pages/GrantReasonDetailPage'
 import PartnersPage from './pages/PartnersPage'
 import PartnerFormPage from './pages/PartnerFormPage'
 import PartnerPackagesPage from './pages/PartnerPackagesPage'
@@ -11,15 +6,6 @@ import PartnerPackagesPage from './pages/PartnerPackagesPage'
 // ── Nav structure ─────────────────────────────────────────────────────────────
 
 const navSections = [
-  {
-    label: 'RoaminCoins',
-    items: [
-      { to: '/coins/transactions', label: 'Coin Management' },
-      { to: '/coins/grants', label: 'Coin Grants' },
-      { to: '/coins/batch-uploads', label: 'Batch Uploads' },
-      { to: '/coins/grant-reasons', label: 'Grant Reasons' },
-    ],
-  },
   {
     label: 'Partner Management',
     items: [
@@ -75,13 +61,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route index element={<Navigate to="/coins/transactions" replace />} />
-        {/* RoaminCoins */}
-        <Route path="coins/transactions" element={<CoinTransactionsPage />} />
-        <Route path="coins/grants" element={<CoinGrantsPage />} />
-        <Route path="coins/batch-uploads" element={<BatchUploadsPage />} />
-        <Route path="coins/grant-reasons" element={<GrantReasonsPage />} />
-        <Route path="coins/grant-reasons/:id" element={<GrantReasonDetailPage />} />
+        <Route index element={<Navigate to="/partners" replace />} />
         {/* Partner Management */}
         <Route path="partners" element={<PartnersPage />} />
         <Route path="partners/add" element={<PartnerFormPage />} />
